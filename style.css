@@ -1,0 +1,90 @@
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: #2c3e50;
+}
+
+.players-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 800px;
+  padding: 10px;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.game-board {
+  background-color: #34495e;
+  width: 800px;
+  height: 800px;
+  .row {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    .square {
+      border: 1px solid #2c3e50;
+      position: relative;
+      aspect-ratio: 1;
+    }
+  }
+  .row:nth-child(odd) {
+    .square:nth-child(odd) {
+      background-color: #bdc3c7;
+    }
+  }
+  .row:nth-child(even) {
+    .square:nth-child(even) {
+      background-color: #bdc3c7;
+    }
+  }
+}
+.start-button-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .start-button {
+    background-color: #2c3e50;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-inline: auto;
+    margin-block: 20px;
+  }
+}
+
+.start-options {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: grayscale(30%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  label {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    margin-bottom: 10px;
+  }
+}
