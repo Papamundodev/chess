@@ -1,10 +1,23 @@
-const Square = ({ row, col, piece }) => {
-  console.log(row, col, piece);
+import Piece from "./Piece";
+
+const Square = ({ row, col, piece, onDragStart, onDrop }) => {
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    onDrop();
+  };
 
   return (
-    <div className={`square ${row}-${col}`}>
+    <div
+      className={`square ${row}-${col}`}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
+    >
       <div className="square-content">
-        <div className="square-content-piece">{piece}</div>
+        {piece && <Piece piece={piece} onDragStart={onDragStart} />}
       </div>
     </div>
   );

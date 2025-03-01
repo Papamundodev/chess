@@ -11,7 +11,6 @@ import KnightW from "./assets/knight-w.svg";
 import BishopW from "./assets/bishop-w.svg";
 import PawnB from "./assets/pawn-b.svg";
 import PawnW from "./assets/pawn-w.svg";
-import Piece from "./Piece";
 import { useState, memo } from "react";
 
 const GameBoard = () => {
@@ -50,29 +49,49 @@ const GameBoard = () => {
     "2h": PawnW,
   });
 
+  const [draggedPiece, setDraggedPiece] = useState(null);
+
   const indexRow = 8;
   const getColumnLetter = (index) => {
     return String.fromCharCode(97 + index);
   };
 
-  const getPiece = (row, col) => {
-    const position = `${row}${col}`;
-    const piecePath = boardState[position];
-    return piecePath && <Piece piece={piecePath} />;
+  const handleDragStart = (position) => {
+    const piece = boardState[position];
+    if (piece) {
+      setDraggedPiece({ position, piece });
+    }
+  };
+
+  const handleDrop = (targetPosition) => {
+    if (!draggedPiece) return;
+
+    setBoardState((prev) => ({
+      ...prev,
+      [draggedPiece.position]: undefined,
+      [targetPosition]: draggedPiece.piece,
+    }));
+
+    setDraggedPiece(null);
   };
 
   return (
     <div className="game-board">
       {Array.from({ length: indexRow }, (_, index) => (
         <div className={`row row-${indexRow - index}`} key={`row-${index}`}>
-          {Array.from({ length: indexRow }, (_, colIndex) => (
-            <Square
-              key={`square-${getColumnLetter(colIndex)}${indexRow - index}`}
-              row={indexRow - index}
-              col={getColumnLetter(colIndex)}
-              piece={getPiece(indexRow - index, getColumnLetter(colIndex))}
-            />
-          ))}
+          {Array.from({ length: indexRow }, (_, colIndex) => {
+            const position = `${indexRow - index}${getColumnLetter(colIndex)}`;
+            return (
+              <Square
+                key={`square-${position}`}
+                row={indexRow - index}
+                col={getColumnLetter(colIndex)}
+                piece={boardState[position]}
+                onDragStart={() => handleDragStart(position)}
+                onDrop={() => handleDrop(position)}
+              />
+            );
+          })}
         </div>
       ))}
     </div>
