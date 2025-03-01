@@ -11,8 +11,8 @@ import KnightW from "./assets/knight-w.svg";
 import BishopW from "./assets/bishop-w.svg";
 import PawnB from "./assets/pawn-b.svg";
 import PawnW from "./assets/pawn-w.svg";
-import { useState, memo } from "react";
-
+import { useState } from "react";
+import { checkPossibleMoves } from "./logic/checkPossibleMoves";
 const GameBoard = () => {
   const [boardState, setBoardState] = useState({
     "8e": KingB,
@@ -50,7 +50,7 @@ const GameBoard = () => {
   });
 
   const [draggedPiece, setDraggedPiece] = useState(null);
-
+  const [possibleMoves, setPossibleMoves] = useState([]);
   const indexRow = 8;
   const getColumnLetter = (index) => {
     return String.fromCharCode(97 + index);
@@ -60,18 +60,20 @@ const GameBoard = () => {
     const piece = boardState[position];
     if (piece) {
       setDraggedPiece({ position, piece });
+      const possibleMoves = checkPossibleMoves(piece, position);
+      setPossibleMoves(possibleMoves);
     }
   };
 
   const handleDrop = (targetPosition) => {
     if (!draggedPiece) return;
-
-    setBoardState((prev) => ({
-      ...prev,
-      [draggedPiece.position]: undefined,
-      [targetPosition]: draggedPiece.piece,
-    }));
-
+    if (possibleMoves.includes(targetPosition)) {
+      setBoardState((prev) => ({
+        ...prev,
+        [draggedPiece.position]: undefined,
+        [targetPosition]: draggedPiece.piece,
+      }));
+    }
     setDraggedPiece(null);
   };
 
@@ -98,4 +100,4 @@ const GameBoard = () => {
   );
 };
 
-export default memo(GameBoard);
+export default GameBoard;
