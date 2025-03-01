@@ -5,7 +5,9 @@ import { StrictMode } from "react";
 const App = () => {
   return (
     <div>
-      <h1>Chess</h1>
+      <div className="header">
+        <h1>Chess</h1>
+      </div>
       <Game />
     </div>
   );
