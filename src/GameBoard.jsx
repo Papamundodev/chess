@@ -15,38 +15,199 @@ import { useState } from "react";
 import { checkPossibleMoves } from "./logic/checkPossibleMoves";
 const GameBoard = () => {
   const [boardState, setBoardState] = useState({
-    "8e": KingB,
-    "8d": QueenB,
-    "8a": RookB,
-    "8h": RookB,
-    "8b": KnightB,
-    "8g": KnightB,
-    "8c": BishopB,
-    "8f": BishopB,
-    "1e": KingW,
-    "1d": QueenW,
-    "1a": RookW,
-    "1h": RookW,
-    "1b": KnightW,
-    "1g": KnightW,
-    "1c": BishopW,
-    "1f": BishopW,
-    "7a": PawnB,
-    "7b": PawnB,
-    "7c": PawnB,
-    "7d": PawnB,
-    "7e": PawnB,
-    "7f": PawnB,
-    "7g": PawnB,
-    "7h": PawnB,
-    "2a": PawnW,
-    "2b": PawnW,
-    "2c": PawnW,
-    "2d": PawnW,
-    "2e": PawnW,
-    "2f": PawnW,
-    "2g": PawnW,
-    "2h": PawnW,
+    "8e": {
+      piece: KingB,
+      color: "black",
+      type: "king",
+      name: "KingB",
+    },
+    "8d": {
+      piece: QueenB,
+      color: "black",
+      type: "queen",
+      name: "QueenB",
+    },
+    "8a": {
+      piece: RookB,
+      color: "black",
+      type: "rook",
+      name: "RookB",
+    },
+    "8h": {
+      piece: RookB,
+      color: "black",
+      type: "rook",
+      name: "RookB",
+    },
+    "8b": {
+      piece: KnightB,
+      color: "black",
+      type: "knight",
+      name: "KnightB",
+    },
+    "8g": {
+      piece: KnightB,
+      color: "black",
+      type: "knight",
+      name: "KnightB",
+    },
+    "8c": {
+      piece: BishopB,
+      color: "black",
+      type: "bishop",
+      name: "BishopB",
+    },
+    "8f": {
+      piece: BishopB,
+      color: "black",
+      type: "bishop",
+      name: "BishopB",
+    },
+    "7a": {
+      piece: PawnB,
+      color: "black",
+      type: "pawn",
+      name: "PawnB",
+    },
+    "7b": {
+      piece: PawnB,
+      color: "black",
+      type: "pawn",
+      name: "PawnB",
+    },
+    "7c": {
+      piece: PawnB,
+      color: "black",
+      type: "pawn",
+      name: "PawnB",
+    },
+    "7d": {
+      piece: PawnB,
+      color: "black",
+      type: "pawn",
+      name: "PawnB",
+    },
+    "7e": {
+      piece: PawnB,
+      color: "black",
+      type: "pawn",
+      name: "PawnB",
+    },
+    "7f": {
+      piece: PawnB,
+      color: "black",
+      type: "pawn",
+      name: "PawnB",
+    },
+    "7g": {
+      piece: PawnB,
+      color: "black",
+      type: "pawn",
+      name: "PawnB",
+    },
+    "7h": {
+      piece: PawnB,
+      color: "black",
+      type: "pawn",
+      name: "PawnB",
+    },
+    // Pièces blanches
+    "1e": {
+      piece: KingW,
+      color: "white",
+      type: "king",
+      name: "KingW",
+    },
+    "1d": {
+      piece: QueenW,
+      color: "white",
+      type: "queen",
+      name: "QueenW",
+    },
+    "1a": {
+      piece: RookW,
+      color: "white",
+      type: "rook",
+      name: "RookW",
+    },
+    "1h": {
+      piece: RookW,
+      color: "white",
+      type: "rook",
+      name: "RookW",
+    },
+    "1b": {
+      piece: KnightW,
+      color: "white",
+      type: "knight",
+      name: "KnightW",
+    },
+    "1g": {
+      piece: KnightW,
+      color: "white",
+      type: "knight",
+      name: "KnightW",
+    },
+    "1c": {
+      piece: BishopW,
+      color: "white",
+      type: "bishop",
+      name: "BishopW",
+    },
+    "1f": {
+      piece: BishopW,
+      color: "white",
+      type: "bishop",
+      name: "BishopW",
+    },
+    "2a": {
+      piece: PawnW,
+      color: "white",
+      type: "pawn",
+      name: "PawnW",
+    },
+    "2b": {
+      piece: PawnW,
+      color: "white",
+      type: "pawn",
+      name: "PawnW",
+    },
+    "2c": {
+      piece: PawnW,
+      color: "white",
+      type: "pawn",
+      name: "PawnW",
+    },
+    "2d": {
+      piece: PawnW,
+      color: "white",
+      type: "pawn",
+      name: "PawnW",
+    },
+    "2e": {
+      piece: PawnW,
+      color: "white",
+      type: "pawn",
+      name: "PawnW",
+    },
+    "2f": {
+      piece: PawnW,
+      color: "white",
+      type: "pawn",
+      name: "PawnW",
+    },
+    "2g": {
+      piece: PawnW,
+      color: "white",
+      type: "pawn",
+      name: "PawnW",
+    },
+    "2h": {
+      piece: PawnW,
+      color: "white",
+      type: "pawn",
+      name: "PawnW",
+    },
   });
 
   const [draggedPiece, setDraggedPiece] = useState(null);
@@ -81,6 +242,7 @@ const GameBoard = () => {
     <div className="game-board">
       {Array.from({ length: indexRow }, (_, index) => (
         <div className={`row row-${indexRow - index}`} key={`row-${index}`}>
+          <span className="row-number">{indexRow - index}</span>
           {Array.from({ length: indexRow }, (_, colIndex) => {
             const position = `${indexRow - index}${getColumnLetter(colIndex)}`;
             return (

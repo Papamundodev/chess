@@ -4,7 +4,7 @@ import "../style.css";
 import { StrictMode } from "react";
 const App = () => {
   return (
-    <div>
+    <div className="app-container">
       <div className="header">
         <h1>Chess</h1>
       </div>

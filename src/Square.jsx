@@ -16,6 +16,7 @@ const Square = ({ row, col, piece, onDragStart, onDrop }) => {
       onDragOver={handleDragOver}
       onDrop={handleDrop}
     >
+      {row === 8 && <span className="square-letter">{col}</span>}
       <div className="square-content">
         {piece && <Piece piece={piece} onDragStart={onDragStart} />}
       </div>
