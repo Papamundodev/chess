@@ -190,3 +190,11 @@
   opacity: 0.5;
   cursor: grabbing;
 }
+
+.possible-move {
+  background-color: #67af86;
+}
+
+.opponent-piece {
+  background-color: #e74c3c;
+}

@@ -19,7 +19,7 @@ const Piece = ({ piece, onDragStart }) => {
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
-      <img src={piece.piece} alt="piece" />
+      <img src={piece.src} alt={`${piece.color} ${piece.type}`} />
     </div>
   );
 };
