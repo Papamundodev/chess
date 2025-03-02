@@ -34,6 +34,7 @@ const Square = ({
       >
         {piece && <Piece piece={piece} onDragStart={onDragStart} />}
       </div>
+      {row === 1 && <span className="square-letter-reverse">{col}</span>}
     </div>
   );
 };

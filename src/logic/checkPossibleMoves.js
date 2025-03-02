@@ -56,33 +56,33 @@ const pawnWPossibleMoves = (position, boardState) => {
   const possibleMoves = [];
   const [row, col] = position.split("");
   const currentRow = parseInt(row);
-  const currentCol = getLetterColumn(col);
+  const currentCol = letterToNumber(col);
 
   //eat
   if (
-    boardState[`${currentRow - 1}${getColumnLetter(currentCol + 1)}`]?.color ===
+    boardState[`${currentRow - 1}${numberToLetter(currentCol + 1)}`]?.color ===
     "black"
   ) {
-    possibleMoves.push(`${currentRow - 1}${getColumnLetter(currentCol + 1)}`);
+    possibleMoves.push(`${currentRow - 1}${numberToLetter(currentCol + 1)}`);
   }
   if (
-    boardState[`${currentRow - 1}${getColumnLetter(currentCol - 1)}`]?.color ===
+    boardState[`${currentRow - 1}${numberToLetter(currentCol - 1)}`]?.color ===
     "black"
   ) {
-    possibleMoves.push(`${currentRow - 1}${getColumnLetter(currentCol - 1)}`);
+    possibleMoves.push(`${currentRow - 1}${numberToLetter(currentCol - 1)}`);
   }
 
   //move
-  if (!boardState[`${currentRow - 1}${getColumnLetter(currentCol)}`]) {
-    possibleMoves.push(`${currentRow - 1}${getColumnLetter(currentCol)}`);
+  if (!boardState[`${currentRow - 1}${numberToLetter(currentCol)}`]) {
+    possibleMoves.push(`${currentRow - 1}${numberToLetter(currentCol)}`);
   }
 
   // Premier mouvement possible de deux cases
   if (
     currentRow === 7 &&
-    !boardState[`${currentRow - 2}${getColumnLetter(currentCol)}`]
+    !boardState[`${currentRow - 2}${numberToLetter(currentCol)}`]
   ) {
-    possibleMoves.push(`${currentRow - 2}${getColumnLetter(currentCol)}`);
+    possibleMoves.push(`${currentRow - 2}${numberToLetter(currentCol)}`);
   }
 
   return possibleMoves;
@@ -92,29 +92,29 @@ const pawnBPossibleMoves = (position, boardState) => {
   const possibleMoves = [];
   const [row, col] = position.split("");
   const currentRow = parseInt(row);
-  const currentCol = getLetterColumn(col);
+  const currentCol = letterToNumber(col);
 
   //eat
   if (
-    boardState[`${currentRow + 1}${getColumnLetter(currentCol - 1)}`]?.color ===
+    boardState[`${currentRow + 1}${numberToLetter(currentCol - 1)}`]?.color ===
     "white"
   ) {
-    possibleMoves.push(`${currentRow + 1}${getColumnLetter(currentCol - 1)}`);
+    possibleMoves.push(`${currentRow + 1}${numberToLetter(currentCol - 1)}`);
   }
   if (
-    boardState[`${currentRow + 1}${getColumnLetter(currentCol + 1)}`]?.color ===
+    boardState[`${currentRow + 1}${numberToLetter(currentCol + 1)}`]?.color ===
     "white"
   ) {
-    possibleMoves.push(`${currentRow + 1}${getColumnLetter(currentCol + 1)}`);
+    possibleMoves.push(`${currentRow + 1}${numberToLetter(currentCol + 1)}`);
   }
 
   //move
-  if (!boardState[`${currentRow + 1}${getColumnLetter(currentCol)}`]) {
-    possibleMoves.push(`${currentRow + 1}${getColumnLetter(currentCol)}`);
+  if (!boardState[`${currentRow + 1}${numberToLetter(currentCol)}`]) {
+    possibleMoves.push(`${currentRow + 1}${numberToLetter(currentCol)}`);
   }
   // Premier mouvement possible de deux cases
   if (currentRow === 2) {
-    possibleMoves.push(`${currentRow + 2}${getColumnLetter(currentCol)}`);
+    possibleMoves.push(`${currentRow + 2}${numberToLetter(currentCol)}`);
   }
 
   return possibleMoves;
@@ -124,7 +124,7 @@ const rookPossibleMoves = (position, boardState) => {
   const possibleMoves = [];
   const [row, col] = position.split("");
   const currentRow = parseInt(row);
-  const currentCol = getLetterColumn(col);
+  const currentCol = letterToNumber(col);
 
   // Directions : droite, gauche, haut, bas
   const directions = [
@@ -147,7 +147,7 @@ const rookPossibleMoves = (position, boardState) => {
         break;
       }
 
-      const newPosition = `${newRow}${getColumnLetter(newCol)}`;
+      const newPosition = `${newRow}${numberToLetter(newCol)}`;
 
       // Si on trouve une pièce
       if (boardState[newPosition]) {
@@ -168,7 +168,7 @@ const knightPossibleMoves = (position) => {
   const possibleMoves = [];
   const [row, col] = position.split("");
   const currentRow = parseInt(row);
-  const currentCol = getLetterColumn(col);
+  const currentCol = letterToNumber(col);
 
   // Tous les mouvements possibles du cavalier (en L)
   const moves = [
@@ -187,7 +187,7 @@ const knightPossibleMoves = (position) => {
     const newCol = currentCol + colOffset;
 
     if (newRow >= 1 && newRow <= 8 && newCol >= 0 && newCol < 8) {
-      possibleMoves.push(`${newRow}${getColumnLetter(newCol)}`);
+      possibleMoves.push(`${newRow}${numberToLetter(newCol)}`);
     }
   });
 
@@ -198,7 +198,7 @@ const bishopPossibleMoves = (position, boardState) => {
   const possibleMoves = [];
   const [row, col] = position.split("");
   const currentRow = parseInt(row);
-  const currentCol = getLetterColumn(col);
+  const currentCol = letterToNumber(col);
 
   // Directions diagonales : haut-droite, haut-gauche, bas-droite, bas-gauche
   const directions = [
@@ -221,7 +221,7 @@ const bishopPossibleMoves = (position, boardState) => {
         break;
       }
 
-      const newPosition = `${newRow}${getColumnLetter(newCol)}`;
+      const newPosition = `${newRow}${numberToLetter(newCol)}`;
 
       // Si on trouve une pièce
       if (boardState[newPosition]) {
@@ -250,7 +250,7 @@ const kingPossibleMoves = (position) => {
   const possibleMoves = [];
   const [row, col] = position.split("");
   const currentRow = parseInt(row);
-  const currentCol = getLetterColumn(col);
+  const currentCol = letterToNumber(col);
 
   // Tous les mouvements possibles du roi (1 case dans toutes les directions)
   const moves = [
@@ -269,18 +269,18 @@ const kingPossibleMoves = (position) => {
     const newCol = currentCol + colOffset;
 
     if (newRow >= 1 && newRow <= 8 && newCol >= 0 && newCol < 8) {
-      possibleMoves.push(`${newRow}${getColumnLetter(newCol)}`);
+      possibleMoves.push(`${newRow}${numberToLetter(newCol)}`);
     }
   });
 
   return possibleMoves;
 };
 
-export const getColumnLetter = (index) => {
+export const numberToLetter = (index) => {
   return String.fromCharCode(97 + index);
 };
 
-export const getLetterColumn = (letter) => {
+export const letterToNumber = (letter) => {
   return letter.charCodeAt(0) - 97;
 };
 

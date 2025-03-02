@@ -17,7 +17,7 @@ import knightB from "./assets/knight-b.svg";
 import pawnB from "./assets/pawn-b.svg";
 
 const piecesState = {};
-data.whitePlayer.pieces.map((piece) => {
+data.player2.pieces.map((piece) => {
   piecesState[piece.position] = piece;
   switch (piece.type) {
     case "king":
@@ -40,7 +40,7 @@ data.whitePlayer.pieces.map((piece) => {
       break;
   }
 });
-data.blackPlayer.pieces.map((piece) => {
+data.player1.pieces.map((piece) => {
   piecesState[piece.position] = piece;
   switch (piece.type) {
     case "king":
@@ -91,36 +91,46 @@ const Game = () => {
   };
 
   return (
-    <div className="game">
-      {gameStart && (
-        <GameInfo
-          whitePlayer={whitePlayer.name}
-          blackPlayer={blackPlayer.name}
-        />
-      )}
-
-      <GameBoard
-        boardState={boardState}
-        setBoardState={setBoardState}
-        possibleMoves={possibleMoves}
-        setPossibleMoves={setPossibleMoves}
-        opponentPieces={opponentPieces}
-        setOpponentPieces={setOpponentPieces}
-      />
-
-      <div className="start-button-container">
-        <button className="start-button" onClick={handleStartOptions}>
-          Start
-        </button>
+    <div className="game-container">
+      <div className="">
+        {gameStart && (
+          <GameInfo
+            whitePlayer={whitePlayer.name}
+            blackPlayer={blackPlayer.name}
+          />
+        )}
       </div>
-
-      {startOptions && (
-        <FormGameStart
-          handleSubmit={handleSubmit}
-          handleChangeWhitePlayer={handleChangeWhitePlayer}
-          handleChangeBlackPlayer={handleChangeBlackPlayer}
+      <div className="game">
+        <GameBoard
+          boardState={boardState}
+          setBoardState={setBoardState}
+          possibleMoves={possibleMoves}
+          setPossibleMoves={setPossibleMoves}
+          opponentPieces={opponentPieces}
+          setOpponentPieces={setOpponentPieces}
+          gameStarted={gameStart}
         />
-      )}
+
+        <div className="start-button-container">
+          <button className="start-button" onClick={handleStartOptions}>
+            Start
+          </button>
+        </div>
+
+        {startOptions && (
+          <FormGameStart
+            handleSubmit={handleSubmit}
+            handleChangeWhitePlayer={handleChangeWhitePlayer}
+            handleChangeBlackPlayer={handleChangeBlackPlayer}
+          />
+        )}
+      </div>
+      <div className="clock">
+        <div className="clock-container">
+          <div className="clock-time">00:00</div>
+          <div className="clock-button">Start</div>
+        </div>
+      </div>
     </div>
   );
 };

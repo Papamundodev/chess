@@ -10,8 +10,8 @@
     ["r", "n", "b", "q", "k", "b", "n", "r"]
   ],
 
-  "whitePlayer": {
-    "name": "Player 1",
+  "player2": {
+    "name": "Player 2",
     "pieceCaptured": [],
     "timeClock": 0,
     "pieces": [
@@ -130,8 +130,8 @@
     ]
   },
 
-  "blackPlayer": {
-    "name": "Player 2",
+  "player1": {
+    "name": "Player 1",
     "pieceCaptured": [],
     "timeClock": 0,
     "pieces": [

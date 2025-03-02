@@ -1,9 +1,6 @@
 import Square from "./Square";
 import { useState } from "react";
-import {
-  checkPossibleMoves,
-  getColumnLetter,
-} from "./logic/checkPossibleMoves";
+import { checkPossibleMoves, numberToLetter } from "./logic/checkPossibleMoves";
 
 const GameBoard = ({
   boardState,
@@ -12,13 +9,13 @@ const GameBoard = ({
   setPossibleMoves,
   opponentPieces,
   setOpponentPieces,
+  gameStarted,
 }) => {
   const [draggedPiece, setDraggedPiece] = useState(null);
-  const indexRow = 8;
 
   const handleDragStart = (position) => {
     const piece = boardState[position];
-    if (piece) {
+    if (piece && gameStarted) {
       setDraggedPiece({ position: piece.position, piece: piece });
       const { possibleMoves, opponentPieces } = checkPossibleMoves(
         piece,
@@ -59,18 +56,25 @@ const GameBoard = ({
     return opponentPieces.includes(position);
   };
 
+  const indexRow = 8;
+  const indexCol = 7;
+  const indexColReverse = 0;
+
   return (
     <div className="game-board">
-      {Array.from({ length: indexRow }, (_, index) => (
+      {[...Array(indexRow)].map((_, index) => (
         <div className={`row row-${indexRow - index}`} key={`row-${index}`}>
           <span className="row-number">{indexRow - index}</span>
-          {Array.from({ length: indexRow }, (_, colIndex) => {
-            const position = `${indexRow - index}${getColumnLetter(colIndex)}`;
+
+          {[...Array(indexRow)].map((_, colIndex) => {
+            const colReverse = numberToLetter(indexCol - colIndex);
+            const col = numberToLetter(indexColReverse + colIndex);
+            const position = `${indexRow - index}${col}`;
             return (
               <Square
                 key={`square-${position}`}
                 row={indexRow - index}
-                col={getColumnLetter(colIndex)}
+                col={col}
                 piece={boardState[position]}
                 onDragStart={() => handleDragStart(position)}
                 onDrop={() => handleDrop(position)}
@@ -80,6 +84,7 @@ const GameBoard = ({
               />
             );
           })}
+          <span className="row-number-reverse">{indexRow - index}</span>
         </div>
       ))}
     </div>
