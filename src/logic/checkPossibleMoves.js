@@ -1,12 +1,12 @@
-export const checkPossibleMoves = (piece, position, boardState) => {
+export const checkPossibleMoves = (piece, position, boardState, isPlaying) => {
   let possibleMoves = [];
   let opponentPieces = [];
   switch (piece.type) {
     case "pawn":
       possibleMoves =
-        piece.color === "white"
-          ? pawnWPossibleMoves(position, boardState)
-          : pawnBPossibleMoves(position, boardState);
+        isPlaying.type === "player1"
+          ? pawnPlayerOnePossibleMoves(position, boardState, isPlaying)
+          : pawnPlayerTwoPossibleMoves(position, boardState, isPlaying);
       break;
     case "rook":
       possibleMoves = rookPossibleMoves(position, boardState);
@@ -52,69 +52,80 @@ export const checkPossibleMoves = (piece, position, boardState) => {
   return { possibleMoves, opponentPieces };
 };
 
-const pawnWPossibleMoves = (position, boardState) => {
+const pawnPlayerOnePossibleMoves = (position, boardState, isPlaying) => {
+  console.log(isPlaying);
   const possibleMoves = [];
   const [row, col] = position.split("");
   const currentRow = parseInt(row);
   const currentCol = letterToNumber(col);
 
+  console.log(
+    boardState[`${currentRow + 1}${numberToLetter(currentCol + 1)}`]?.color,
+  );
+  // player one move
   //eat
   if (
-    boardState[`${currentRow - 1}${numberToLetter(currentCol + 1)}`]?.color ===
-    "black"
-  ) {
-    possibleMoves.push(`${currentRow - 1}${numberToLetter(currentCol + 1)}`);
-  }
-  if (
-    boardState[`${currentRow - 1}${numberToLetter(currentCol - 1)}`]?.color ===
-    "black"
-  ) {
-    possibleMoves.push(`${currentRow - 1}${numberToLetter(currentCol - 1)}`);
-  }
-
-  //move
-  if (!boardState[`${currentRow - 1}${numberToLetter(currentCol)}`]) {
-    possibleMoves.push(`${currentRow - 1}${numberToLetter(currentCol)}`);
-  }
-
-  // Premier mouvement possible de deux cases
-  if (
-    currentRow === 7 &&
-    !boardState[`${currentRow - 2}${numberToLetter(currentCol)}`]
-  ) {
-    possibleMoves.push(`${currentRow - 2}${numberToLetter(currentCol)}`);
-  }
-
-  return possibleMoves;
-};
-
-const pawnBPossibleMoves = (position, boardState) => {
-  const possibleMoves = [];
-  const [row, col] = position.split("");
-  const currentRow = parseInt(row);
-  const currentCol = letterToNumber(col);
-
-  //eat
-  if (
-    boardState[`${currentRow + 1}${numberToLetter(currentCol - 1)}`]?.color ===
-    "white"
-  ) {
-    possibleMoves.push(`${currentRow + 1}${numberToLetter(currentCol - 1)}`);
-  }
-  if (
-    boardState[`${currentRow + 1}${numberToLetter(currentCol + 1)}`]?.color ===
-    "white"
+    isOppositeColor(
+      boardState[`${currentRow + 1}${numberToLetter(currentCol + 1)}`]?.color,
+    ) === isPlaying.color
   ) {
     possibleMoves.push(`${currentRow + 1}${numberToLetter(currentCol + 1)}`);
+  }
+  if (
+    isOppositeColor(
+      boardState[`${currentRow + 1}${numberToLetter(currentCol - 1)}`]?.color,
+    ) === isPlaying.color
+  ) {
+    possibleMoves.push(`${currentRow + 1}${numberToLetter(currentCol - 1)}`);
   }
 
   //move
   if (!boardState[`${currentRow + 1}${numberToLetter(currentCol)}`]) {
     possibleMoves.push(`${currentRow + 1}${numberToLetter(currentCol)}`);
   }
+
   // Premier mouvement possible de deux cases
-  if (currentRow === 2) {
+  if (
+    currentRow === 2 &&
+    !boardState[`${currentRow + 2}${numberToLetter(currentCol)}`]
+  ) {
     possibleMoves.push(`${currentRow + 2}${numberToLetter(currentCol)}`);
+  }
+
+  return possibleMoves;
+};
+
+const pawnPlayerTwoPossibleMoves = (position, boardState, isPlaying) => {
+  console.log(isPlaying);
+
+  const possibleMoves = [];
+  const [row, col] = position.split("");
+  const currentRow = parseInt(row);
+  const currentCol = letterToNumber(col);
+
+  //eat
+  if (
+    isOppositeColor(
+      boardState[`${currentRow - 1}${numberToLetter(currentCol - 1)}`]?.color,
+    ) === isPlaying.color
+  ) {
+    possibleMoves.push(`${currentRow - 1}${numberToLetter(currentCol - 1)}`);
+  }
+  if (
+    isOppositeColor(
+      boardState[`${currentRow - 1}${numberToLetter(currentCol + 1)}`]?.color,
+    ) === isPlaying.color
+  ) {
+    possibleMoves.push(`${currentRow - 1}${numberToLetter(currentCol + 1)}`);
+  }
+
+  //move
+  if (!boardState[`${currentRow - 1}${numberToLetter(currentCol)}`]) {
+    possibleMoves.push(`${currentRow - 1}${numberToLetter(currentCol)}`);
+  }
+  // Premier mouvement possible de deux cases
+  if (currentRow === 7) {
+    possibleMoves.push(`${currentRow - 2}${numberToLetter(currentCol)}`);
   }
 
   return possibleMoves;
@@ -290,4 +301,16 @@ export const checkIfpossibleMoveOtherPiece = (position, boardState) => {
     return true;
   }
   return false;
+};
+
+const isOppositeColor = (color) => {
+  if (color === undefined) {
+    return false;
+  }
+  if (color === "white") {
+    return "black";
+  }
+  if (color === "black") {
+    return "white";
+  }
 };

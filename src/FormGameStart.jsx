@@ -1,32 +1,26 @@
-const FormGameStart = ({
-  handleSubmit,
-  handleChangeWhitePlayer,
-  handleChangeBlackPlayer,
-}) => {
+const FormGameStart = ({ handleColorSelected }) => {
   return (
-    <form className="start-options">
+    <form className="start-options" onSubmit={(e) => e.preventDefault()}>
       <div>
-        <label htmlFor="white-player">
-          White Player
-          <input
-            onChange={handleChangeWhitePlayer}
-            className="name-player"
-            type="text"
-            name="white-player"
-          />
-        </label>
-        <label htmlFor="black-player">
-          Black Player
-          <input
-            onChange={handleChangeBlackPlayer}
-            className="name-player"
-            type="text"
-            name="black-player"
-          />
-        </label>
-        <button type="submit" onClick={handleSubmit}>
-          Start
-        </button>
+        <h2>Pick your color</h2>
+        <div className="select-color-container">
+          <button
+            type="button"
+            className="select-color-button select-color-button-white"
+            onClick={handleColorSelected}
+            value="white"
+          >
+            White
+          </button>
+          <button
+            type="button"
+            className="select-color-button select-color-button-black"
+            onClick={handleColorSelected}
+            value="black"
+          >
+            Black
+          </button>
+        </div>
       </div>
     </form>
   );

@@ -17,114 +17,82 @@
     "pieces": [
       {
         "name": "Pawn-a",
-        "src": "pawn-w.svg",
         "position": "7a",
-        "color": "white",
         "type": "pawn"
       },
       {
         "name": "Pawn-b",
-        "src": "pawn-w.svg",
         "position": "7b",
-        "color": "white",
         "type": "pawn"
       },
       {
         "name": "Pawn-c",
-        "src": "pawn-w.svg",
         "position": "7c",
-        "color": "white",
         "type": "pawn"
       },
       {
         "name": "Pawn-d",
-        "src": "pawn-w.svg",
         "position": "7d",
-        "color": "white",
         "type": "pawn"
       },
       {
         "name": "Pawn-e",
-        "src": "pawn-w.svg",
         "position": "7e",
-        "color": "white",
         "type": "pawn"
       },
       {
         "name": "Pawn-f",
-        "src": "pawn-w.svg",
         "position": "7f",
-        "color": "white",
         "type": "pawn"
       },
       {
         "name": "Pawn-g",
-        "src": "pawn-w.svg",
         "position": "7g",
-        "color": "white",
         "type": "pawn"
       },
       {
         "name": "Pawn-b",
-        "src": "pawn-w.svg",
         "position": "7h",
-        "color": "white",
         "type": "pawn"
       },
       {
         "name": "Knight-b",
-        "src": "knight-w.svg",
         "position": "8b",
-        "color": "white",
         "type": "knight"
       },
       {
         "name": "Knight-g",
-        "src": "knight-w.svg",
         "position": "8g",
-        "color": "white",
         "type": "knight"
       },
       {
         "name": "Bishop-c",
-        "src": "bishop-w.svg",
         "position": "8c",
-        "color": "white",
         "type": "bishop"
       },
       {
         "name": "Bishop-f",
-        "src": "bishop-w.svg",
         "position": "8f",
-        "color": "white",
         "type": "bishop"
       },
       {
         "name": "Rook-a",
-        "src": "rook-w.svg",
         "position": "8a",
-        "color": "white",
         "type": "rook"
       },
       {
         "name": "Rook-h",
-        "src": "rook-w.svg",
         "position": "8h",
-        "color": "white",
         "type": "rook"
       },
       {
         "name": "Queen",
-        "src": "queen-w.svg",
         "position": "8d",
-        "color": "white",
         "type": "queen"
       },
       {
         "name": "King",
-        "src": "king-w.svg",
         "position": "8e",
-        "color": "white",
         "type": "king"
       }
     ]
@@ -137,114 +105,82 @@
     "pieces": [
       {
         "name": "Pawn-a",
-        "src": "pawn-b.svg",
         "position": "2a",
-        "color": "black",
         "type": "pawn"
       },
       {
         "name": "Pawn-b",
-        "src": "pawn-b.svg",
         "position": "2b",
-        "color": "black",
         "type": "pawn"
       },
       {
         "name": "Pawn-c",
-        "src": "pawn-b.svg",
         "position": "2c",
-        "color": "black",
         "type": "pawn"
       },
       {
         "name": "Pawn-d",
-        "src": "pawn-b.svg",
         "position": "2d",
-        "color": "black",
         "type": "pawn"
       },
       {
         "name": "Pawn-e",
-        "src": "pawn-b.svg",
         "position": "2e",
-        "color": "black",
         "type": "pawn"
       },
       {
         "name": "Pawn-f",
-        "src": "pawn-b.svg",
         "position": "2f",
-        "color": "black",
         "type": "pawn"
       },
       {
         "name": "Pawn-g",
-        "src": "pawn-b.svg",
         "position": "2g",
-        "color": "black",
         "type": "pawn"
       },
       {
         "name": "Pawn-h",
-        "src": "pawn-b.svg",
         "position": "2h",
-        "color": "black",
         "type": "pawn"
       },
       {
         "name": "Knight-b",
-        "src": "knight-b.svg",
         "position": "1b",
-        "color": "black",
         "type": "knight"
       },
       {
         "name": "Knight-g",
-        "src": "knight-b.svg",
         "position": "1g",
-        "color": "black",
         "type": "knight"
       },
       {
         "name": "Bishop-c",
-        "src": "bishop-b.svg",
         "position": "1c",
-        "color": "black",
         "type": "bishop"
       },
       {
         "name": "Bishop-f",
-        "src": "bishop-b.svg",
         "position": "1f",
-        "color": "black",
         "type": "bishop"
       },
       {
         "name": "Rook-a",
-        "src": "rook-b.svg",
         "position": "1a",
-        "color": "black",
         "type": "rook"
       },
       {
         "name": "Rook-h",
-        "src": "rook-b.svg",
         "position": "1h",
-        "color": "black",
         "type": "rook"
       },
       {
         "name": "Queen",
-        "src": "queen-b.svg",
         "position": "1d",
-        "color": "black",
         "type": "queen"
       },
       {
         "name": "King",
-        "src": "king-b.svg",
         "position": "1e",
-        "color": "black",
         "type": "king"
       }
     ]

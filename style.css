@@ -1,11 +1,19 @@
 :root {
   --board-size: 800px;
   --square-size: calc(var(--board-size) / 8);
-  --board-color: #e10a0a;
+  --board-color: #2c3e50;
   --square-white: #bdc3c7;
   --square-black: #2c3e50;
   --game-background: #1d3d5c;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ----- App ----- */
 
 #app {
   display: flex;
@@ -35,6 +43,8 @@
   }
 }
 
+/* ----- Game ----- */
+
 .game-container {
   display: grid;
   grid-template-columns:
@@ -43,27 +53,38 @@
   gap: 2em;
 }
 
-.game-info {
+/* ----- Game Info ----- */
+.game-info-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-  margin: 0 auto;
+  justify-content: center;
   width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  color: #fff;
-  font-size: 1.5rem;
-  .player-info {
+  height: var(--board-size);
+  .game-info {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    h2 {
-      margin: 0;
-    }
-    span {
-      font-size: 1rem;
+    justify-content: space-around;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    color: #fff;
+    gap: 2em;
+    font-size: 1.5rem;
+    .player-info {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+      h2 {
+        margin: 0;
+      }
+      span {
+        font-size: 1rem;
+      }
     }
   }
 }
@@ -75,6 +96,9 @@
   justify-content: center;
   padding: 2em;
   gap: 2em;
+
+  /* ----- Game Board ----- */
+
   .game-board {
     background-color: var(--board-color);
     width: var(--board-size);
@@ -143,6 +167,7 @@
     }
   }
 
+  /* ----- Start Button ----- */
   .start-button-container {
     width: 100%;
     display: flex;
@@ -159,6 +184,7 @@
     }
   }
 
+  /* ----- Start Options Form ----- */
   .start-options {
     position: fixed;
     top: 0;
@@ -179,13 +205,24 @@
       background-color: #fff;
       padding: 20px;
       border-radius: 10px;
-    }
-    label {
-      display: flex;
-      flex-direction: column;
-      align-items: start;
-      justify-content: start;
-      margin-bottom: 10px;
+      .select-color-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2em;
+        .select-color-button {
+          background-color: var(--square-black);
+          color: #fff;
+          padding: 10px 20px;
+          border-radius: 5px;
+        }
+        .select-color-button-white {
+          background-color: var(--square-white);
+        }
+        .select-color-button-black {
+          background-color: var(--square-black);
+        }
+      }
     }
   }
 }

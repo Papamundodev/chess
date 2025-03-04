@@ -10,17 +10,22 @@ const GameBoard = ({
   opponentPieces,
   setOpponentPieces,
   gameStarted,
+  isPlaying,
+  setIsPlaying,
+  Player1,
 }) => {
   const [draggedPiece, setDraggedPiece] = useState(null);
 
   const handleDragStart = (position) => {
     const piece = boardState[position];
-    if (piece && gameStarted) {
+
+    if (piece && gameStarted && isPlaying.color === piece.color) {
       setDraggedPiece({ position: piece.position, piece: piece });
       const { possibleMoves, opponentPieces } = checkPossibleMoves(
         piece,
         position,
         boardState,
+        isPlaying,
       );
       setPossibleMoves(possibleMoves);
       setOpponentPieces(opponentPieces);
@@ -40,6 +45,19 @@ const GameBoard = ({
         [draggedPiece.position]: undefined,
         [targetPosition]: updatedPiece,
       }));
+      setIsPlaying(
+        draggedPiece.piece.color === "white"
+          ? {
+              ...isPlaying,
+              color: "black",
+              type: isPlaying.type === "player1" ? "player2" : "player1",
+            }
+          : {
+              ...isPlaying,
+              color: "white",
+              type: isPlaying.type === "player1" ? "player2" : "player1",
+            },
+      );
     }
     setDraggedPiece(null);
     setPossibleMoves([]);
@@ -59,7 +77,7 @@ const GameBoard = ({
   const indexRow = 8;
   const indexCol = 7;
   const indexColReverse = 0;
-
+  let col;
   return (
     <div className="game-board">
       {[...Array(indexRow)].map((_, index) => (
@@ -67,8 +85,11 @@ const GameBoard = ({
           <span className="row-number">{indexRow - index}</span>
 
           {[...Array(indexRow)].map((_, colIndex) => {
-            const colReverse = numberToLetter(indexCol - colIndex);
-            const col = numberToLetter(indexColReverse + colIndex);
+            if (Player1.color === "white") {
+              col = numberToLetter(indexColReverse + colIndex);
+            } else {
+              col = numberToLetter(indexCol - colIndex);
+            }
             const position = `${indexRow - index}${col}`;
             return (
               <Square
