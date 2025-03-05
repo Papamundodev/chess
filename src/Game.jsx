@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FormGameStart from "./FormGameStart";
 import GameInfo from "./GameInfo";
 import GameBoard from "./GameBoard";
@@ -15,7 +15,6 @@ import rookB from "./assets/rook-b.svg";
 import bishopB from "./assets/bishop-b.svg";
 import knightB from "./assets/knight-b.svg";
 import pawnB from "./assets/pawn-b.svg";
-
 const setupPiecesWhite = (data) => {
   const pieces = {};
   data.player1.pieces.forEach((piece) => {
@@ -143,6 +142,7 @@ const setupPiecesBlack = (data) => {
 };
 
 const Game = () => {
+  const baseTime = 300;
   const [gameStart, setGameStart] = useState(false);
   const [startOptions, setStartOptions] = useState(false);
   const [isPlaying, setIsPlaying] = useState({});
@@ -151,6 +151,8 @@ const Game = () => {
   const [boardState, setBoardState] = useState({});
   const [possibleMoves, setPossibleMoves] = useState([]);
   const [opponentPieces, setOpponentPieces] = useState([]);
+  const [resetClock, setResetClock] = useState(false);
+  const [gameOver, setGameOver] = useState("");
 
   const handleStartOptions = () => {
     setStartOptions(true);
@@ -188,17 +190,27 @@ const Game = () => {
         type: "player2",
       });
     }
-
     setBoardState({ ...newPlayer1Pieces });
     setGameStart(true);
     setStartOptions(false);
+    setResetClock(true);
+    setGameOver("");
   };
 
   return (
     <div className="game-container">
       <div className="game-info-container">
         {gameStart && (
-          <GameInfo player1={Player1} player2={Player2} isPlaying={isPlaying} />
+          <GameInfo
+            player1={Player1}
+            player2={Player2}
+            isPlaying={isPlaying}
+            resetClock={resetClock}
+            setResetClock={setResetClock}
+            baseTime={baseTime}
+            onGameOver={(value) => setGameOver(value)}
+            gameOver={gameOver}
+          />
         )}
       </div>
       <div className="game">
@@ -224,12 +236,6 @@ const Game = () => {
         {startOptions && (
           <FormGameStart handleColorSelected={handleColorSelected} />
         )}
-      </div>
-      <div className="clock">
-        <div className="clock-container">
-          <div className="clock-time">00:00</div>
-          <div className="clock-button">Start</div>
-        </div>
       </div>
     </div>
   );

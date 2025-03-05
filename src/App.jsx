@@ -2,6 +2,7 @@ import { createRoot } from "react-dom/client";
 import Game from "./Game";
 import "../style.css";
 import { StrictMode } from "react";
+
 const App = () => {
   return (
     <div className="app-container">
